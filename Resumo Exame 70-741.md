@@ -583,7 +583,7 @@ Get_IpamDnsResourceRecord -ZoneName Saulohenrique.local
 
 ## *NAT*
 
-Sem comandos a serem documentador
+> Documentação em breve. 
 
 ## Direct Acess
 
