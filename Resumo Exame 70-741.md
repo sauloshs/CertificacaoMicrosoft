@@ -583,8 +583,7 @@ Get_IpamDnsResourceRecord -ZoneName Saulohenrique.local
 
 ## *NAT*
 
-NAT permite a implementação de um esquema de endereçamento de IPv4 privado em sua organização, e também que usuários, aplicativos e serviços acessem a internet. NAT é um dispositivo ou um serviço de software que permite aos computadores de sua organização acessarem recursos da internet, transformando endereços IPv4 privados de sua intranet em endereços IPv4 públicos na internet.
-Todos os dispositivos que conectam a internet exigem um endereço IPv4 público exclusivo. No entanto, no espaço de endereços IPv4 não existem endereços públicos suficientes para todos os dispositivos que exigem esse tipo de conexão. Como resultado as empresas usam endereços IPv4 privados para os dispositivos dentro de suas intranet.
+> Documentação em breve. 
 
 ## Direct Acess
 
@@ -641,12 +640,6 @@ Get-RemoteAccessConnectionStatistics
 - Você pode controlar o tráfego usando filtros IP de discagem por demanda ou persistente. 
   - O filtro de demanda ele fara com que a conexão VPN seja iniciada quando seja necessário.
   - O filtro de persistência a conexão é continua e caso ocorra uma desconexão a conexão é restabelecida novamente. 
-
-### *Características:*
-
-- **Autenticação** ajuda a garantir que o cliente e o servidor VPN possam se identificar um com o outro. É possível escolher entre vários métodos de autenticação diferentes, dependendo do protocolo VPN selecionado e de outros fatores da infraestrutura.
-- **Criptografia** como dados privados são roteados em uma rede pública, é importante garantir a segurança desses dados em trânsito. A criptografia de dados é usada para essa finalidade.
-- **Encapsulamento** uma VPN faz o roteamento de dados em meio de uma rede pública, usando protocolos de tunelamento. Os dados privados são encapsulados em uma estrutura, com um cabeçalho público contendo as informações de roteamento apropriadas, as quais podem transitar em uma rede pública e chegar ao destino privado correto.
 
 ### *Opções de protocolos de túnel de VPN*
 
