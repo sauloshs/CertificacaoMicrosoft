@@ -20,8 +20,8 @@ Test-Connection -ComputerName srv01, srv02
 ## *Comando básico para editar o IP através do  Powershell*
 
 ```powershell
-# Atibuindo IP a uma interface de rede
-Nwe-NetIPAddress -InterfaceAlias "Local Area Conection" -IPAddress 192.168.17.10 -PrefixLength 24 -DefaultGateway 192.168.17.1
+# Atibuindo IP a uma interface de rede 
+New-NetIPAddress -InterfaceAlias "Local Area Conection" -IPAddress 192.168.17.10 -PrefixLength 24 -DefaultGateway 192.168.17.1
 # Definindo configurações de DNS
 Set-DNSClientServerAddresses -InterfaceAlias "Local Area Conection" -ServerAddresses 8.8.8.8, 8.8.4.4
 ```
@@ -120,12 +120,12 @@ ipconfig /setclassid ethernet ClientClass (ClinetClass foi o nome da classe cria
 
 ### *Agente de retransmissão DHCP*
 
-Um agente de retransmissão DHCP realiza esculta de difusões DHCP de clientes DHCP e as retransmite para servidores DHCP em sub-redes diferentes. 
+Um agente de retransmissão DHCP realiza escuta de difusões DHCP de clientes DHCP e as retransmite para servidores DHCP em sub-redes diferentes. 
 Como a difusão DHCP não passa pelo roteador temos que configurar o agente de retransmissão no roteador para encaminhar os pacotes de difusão para os servidores de DHCP.
 
 ### *Super Scopo*
 
-É um agrupamento de Scopo do meu servidor DHCP e ele deve ser usado quando o meu servidor DHCP já esgotou todos os endereços disponiveis em meu Scopo. Dessa forma agrupamos mais de um Scopo para atender a nova requisições.
+É um agrupamento de Scopo do meu servidor DHCP e ele deve ser usado quando o meu servidor DHCP já esgotou todos os endereços disponíveis em meu Scopo. Dessa forma agrupamos mais de um Scopo para atender a nova requisições.
 Devemos lembrar de criar rotas em nosso roteador para que seja possível a comunicação entre todos os scopos mesmo estando em sub-redes diferentes.
 Segue comandos para criação e exclusão de um Super scopo:
 
@@ -140,7 +140,7 @@ Remove-DhcpServerv4Superscope -SuperscopeName "Lab Super Scope"
 
 ### *Failover DHCP*
 
-Anteriormente para garantirmos a alta disponibilidade de um servidor DHCP era necessario configurar um Cluster de DHCP ou realizar a divisão do scopo de DHCP.
+Anteriormente para garantirmos a alta disponibilidade de um servidor DHCP era necessário configurar um Cluster de DHCP ou realizar a divisão do scopo de DHCP.
 Mas a partir do Windows Server 2012 surgiu o recurso Failover de DHCP que pode trabalhar das seguintes formas:
 
 - Espera Ativa
@@ -160,11 +160,10 @@ Segue comandos para gerenciar um Failover de DHCP por Powershell.
 
 ```powershell
 # Adicionando um Failover de DHCP
-Add-DhcpServerv4Failover -ComputerName srv01.saulo.local -Name "Failover Powershell"  -PartnerServer srv02.saulo.local -ScopeId 192.168.17.0, 192.168.16.0 -SharedSec
-ret "P@ssw0rd"
+Add-DhcpServerv4Failover -ComputerName srv01.saulo.local -Name "Failover Powershell"  -PartnerServer srv02.saulo.local -ScopeId 192.168.17.0, 192.168.16.0 -SharedSecret "P@ssw0rd"
 # Consutando um Failover de DHCP
 Get-DhcpServerv4Failover
-# Alterando configurações de Failover de DHCP (No Exempor a seguir faço uma alterçao do modo de balanceamento de carga para espera ativa)
+# Alterando configurações de Failover de DHCP (No Exemplo a seguir faço uma alterçao do modo de balanceamento de carga para espera ativa)
 Set-DhcpServerv4Failover -Name "Failolover Poowershell" -Mode HotStandby
 ```
 
