@@ -263,7 +263,7 @@ Entre os componentes da infraestrutura DNS estão?
 Tipos de Zona em um servidor DNS:
 
 - Zona primária (é uma zona que pode ser atualizada diretamente nesse servidor, criar modificar)
-- Zona secundária (recebe uma copia da zona secundaria e é criada apenas para equilibrar o trafego entre os servidores ou como contingencia caso um servidor primário apresente falhas)
+- Zona secundária (recebe uma copia da zona primaria e é criada apenas para equilibrar o trafego entre os servidores ou como contingencia caso um servidor primário apresente falhas)
 - Zona de stub (zona que abriga apenas registros de identificação dos servidores principais, essas zonas são usadas em fusões de empresas)
 
 OBS: Somente as zonas primarias e as zonas de stub podem ser armazenadas no AD.
@@ -277,7 +277,7 @@ Como criar uma zona DNS com o Powershell
 ```powershell
 # Criando uma nova zona primaria
 Add-DnsServerPrimaryZone -Name "saulohenrique.local" -ZoneFile "saulohenrique.local.dns" -DynamicUpdate None
-# Criando um registro tipo no A no DNS
+# Criando um registro do tipo A no DNS
  Add-DnsServerResourceRecord -ZoneName saulohenrique.local -a -Name "Filesever"  -IPv4Address 192.168.17.10
 # Consultando todos os meus registro em uma zona especifica 
 Get-DnsServerResourceRecord -ZoneName saulohenrique.local
@@ -288,7 +288,9 @@ Get-DnsServerResourceRecord -ZoneName saulohenrique.local
 Um encaminhador é um servidor de sistema de nome de domínio (DNS)  de uma rede que encaminha consultas DNS sobre nomes DNS externos para servidores DNS que estão fora da rede. Você também pode encaminhar consultas de acordo com nomes de domínio específicos usando encaminhadores condicionais.
 Você indica um servidor DNS de uma rede como um encaminhador ao configurar os outros servidores DNS da rede para que eles encaminhem para esse servidor DNS consultas que não consigam resolver localmente. 
 
-Encaminhadores condicionais é uma servidor DNS de uma rede que encaminha consultas DNS de acordo com o nome de domínio DNS na consulta. Por exemplo, você pode configurar um servidor DNS para encaminhar todas as consultas recebidas sobre nomes que terminam com corp.contoso.com para o endereço IP de um servidor DNS específico ou para os endereços IP de vários servidores DNS.Comandos em Powershell para adicionar encaminhadores e encaminhadores condicionais.
+Encaminhadores condicionais é uma servidor DNS de uma rede que encaminha consultas DNS de acordo com o nome de domínio DNS na consulta. Por exemplo, você pode configurar um servidor DNS para encaminhar todas as consultas recebidas sobre nomes que terminam com corp.contoso.com para o endereço IP de um servidor DNS específico ou para os endereços IP de vários servidores DNS.
+
+Comandos em Powershell para adicionar encaminhadores e encaminhadores condicionais.
 
 ```powershell
 # Adicionando encaminhadores.(O parametro PassThru é utilizado para que seja exibido na tela a confirmação do comando)
@@ -297,7 +299,7 @@ Add-DnsServerForwarder -IPAddress 192.168.17.12 -PassThru
 Add-DnsServerConditionalForwarderZone -Name "sith.local" -MasterServers 192.168.17.13 -PassThru 
 ```
 
-Os computadores cliente DNS podem usar a atualização dinâmica para registrar dinamicamente seus registros de recursos em um servidor DNS sempre que houver alguma alteração. Isso reduz a necessidade da administração manal de registros de zona.
+Os computadores cliente DNS podem usar a atualização dinâmica para registrar dinamicamente seus registros de recursos em um servidor DNS sempre que houver alguma alteração. Isso reduz a necessidade da administração manual de registros de zona.
 Comando em Powershell e no Prompt de comando para registrar uma máquina de forma automática no DNS.
 
 ```powershell
