@@ -429,7 +429,6 @@ dnscmd /config /cachelockingpercent 50
 
 Para visualizar os logs de eventos do DNS devemos acessar o Visualizador de Eventos e ir até a opção aplicativos.
 Ou podemos usar o Log de depuração que vem desabilitado por padrão.
-
 Limitar a taxa de resposta é um recurso que por padrão vem desabilitado e serve para limitar o número de requisição a um servidor DNS. Para habilitar esse recurso usamos o seguinte comando em Powershell:
 
 ```powershell
