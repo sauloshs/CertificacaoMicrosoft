@@ -386,7 +386,7 @@ O DNSSEC funciona da seguinte maneira:
 - Os revolvedores usam  âncoras de confiança para recuperar chaves públicas e para construir cadeias confiáveis.
 - O DNSSEC requer que as âncoras de confiança sejam configuradas em todos os servidores DNS que participam de DNSSEC.
 - O DNSSEC usa o NRPT que contém regras que controlam o comportamento do computador cliente solicitante no envio de consultas e no tratamento de respostas.
-  - NRPT (tabela de politica de resolução de nomes)
+  - NRPT (tabela de politica de resolução de nomes) geralmente implementada por GPO.
 
 ```powershell
 # Consultando se o DNSSEC esta habilitado 
@@ -395,7 +395,10 @@ Resolve-DnsName srv01.saulohenrique.local -DnssecOK -Server srv01
 Get-DnsClientNrptPolicy
 ```
 
+Após a configuração da zona DNSSEC deve ser criada a GPO com a NRPT apontando para a zona DNS onde deseja se aplicar a segurança na resolução de nomes. 
+
 Socket Pool faz com que o servidor DNS use portas aleatórias sempre que realizar uma consulta (A porta padrão é a 53) ele vem habilitado por padrão com 2500 portas diferentes.
+
 podemos alterar esse numero com o seguinte comando:
 
 ```powershell
@@ -607,11 +610,11 @@ Todos os dispositivos que conectam a internet exigem um endereço IPv4 público 
 Comandos básicos para verificação.
 
 ```powershell
-# Verificação do Diect Acess 
+# Verificação do Diect Acess e assegurar que a GPO do DirectAcess foi realmente aplicada ao cliente.
 Get-DAClientExperienceConfiguration	
-# Comando para verificar se o clinete esta usando o IPHttps
-Get_NetIPHttpstate
-# Para resolução de conectividade do direct acess 
+# Comando para verificar se o clinete esta usando o IP Https
+Get_NetIPHttpState
+# Para resolução de problemas IP HTTPs 
 Get-NetIPhttpsConfiguration
 # Comando utilizadao para validar as configurações existentes na NRPT
 Get-DnsClientNrptPolicy
