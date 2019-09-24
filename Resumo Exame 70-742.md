@@ -74,3 +74,16 @@ Get-addcCloningExcludeApplicationList -GenerateXml
 New-addcCloneConfigFile -static ipv4address "192.168.0.5" -Ipv4DnsResolver "192.168.0.1" -Ipv4SubnetMask "255.255.255.0" -Ipv4DefaultGateway "192.168.0.254" -ClonecomputerName "srvdc05"
 ```
 
+## *IFM*
+
+O metodo IFM é utilizado para implemtanção de AD em ambientes que duas filias estão conectadas atraves de link de internet lento. Com isso utilizamos a a midia de intação a fim de minimizar o impacto da implantação do AD, pois sabemos que a replicação inicial pode ser muito grande.
+
+Comandos utilizados para criação da mídia:
+
+```powershell
+ntdsutil # Após ececutar esse comando entramos no prompt 
+active instace ntds # Para acessar o prompt NTDS
+ifm # Com esse comando entramos no modulo NTDS
+create sysvol full c:\ifm # Com esse comando é criado os arquivos necessários para a criação da midia IFM
+```
+
