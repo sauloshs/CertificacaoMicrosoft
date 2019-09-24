@@ -48,3 +48,29 @@ Uninstall -addsdomaincontroller
 Uninstall -WindowsFeature AD-Domain-Services
 ```
 
+## *Clonagem do Active Directory*
+
+Você pode clonar AD para:
+
+- Implantação mais rápida.
+- Nuvens privadas.
+- Estratégia de recuperação.
+
+Requisitos:
+
+- O Hypervisor precisa oferecer suporte a identificação de geração em VMs.
+- Controlador de domínio baseados em Windows Server 2012 ou posterior 
+- Emulador PDC online.
+- O controlador de domínio colunável deve pertencer ao grupo controladores de domínios clonáveis.
+
+Comandos que devem ser executados no PowerShell para clonar o controlador de domínio:
+
+```powershell
+# Para listar aplicações imcompativeis com a clonagem 	
+Get-addcCloningExcludeApplicationList
+# Utilize o parametro para importar a lista para um arquivo XML
+Get-addcCloningExcludeApplicationList -GenerateXml
+# Configurações iniciais do clone que serão armazenadas na pasta c:\windows\NTDS
+New-addcCloneConfigFile -static ipv4address "192.168.0.5" -Ipv4DnsResolver "192.168.0.1" -Ipv4SubnetMask "255.255.255.0" -Ipv4DefaultGateway "192.168.0.254" -ClonecomputerName "srvdc05"
+```
+
