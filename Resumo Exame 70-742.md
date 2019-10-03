@@ -87,3 +87,42 @@ ifm # Com esse comando entramos no modulo NTDS
 create sysvol full c:\ifm # Com esse comando é criado os arquivos necessários para a criação da midia IFM
 ```
 
+## *FSMO*
+
+​	As funções FSMO são:
+
+- Mestre RID responsável por gerar os SIDs dos objetos, porem para evitar problemas na criação de objetos na rede por indisponibilidade do mestre de operação ele distribui um bloco de SID para cada controlador de domínio.
+
+- Mestre de Infraestrutura 
+
+- Mestre de nomeação de domínio
+
+- Emulador PDC ou Controlador de domínio primário, responsável por atualizar a hora de todos os computadores do domínio e necessário na clonagem de AD DS.
+
+  - Mestre de Schema, Para ter acesso ao console do mestre de schema é necessário registrar uma dll com o seguinte comando no prom	pt de comando.
+
+    ```powershell
+    regsvr32 schmgmt.dll
+    ```
+
+    Em seguida através do mmc adcionar o console do schema e realizar a alteração.
+
+Alteração das funções FSMO através da linha de comando:
+
+```powershell
+# Consultar o mestre de esquema do domínio
+netdom query fsmo 
+# Sequencia de comandos necessarios para realizar a alterção das funções.
+ntdsutil
+roles
+connections
+connect to server srv01.shs.local # após realizar a conexão devemos sair com o comando abaixo.
+quit
+# Dando inicio a transferencia de funções.
+transfer pdc
+trabsfer rid master
+transfer naming master
+transfer schema master
+transfer infrastructure master
+```
+
