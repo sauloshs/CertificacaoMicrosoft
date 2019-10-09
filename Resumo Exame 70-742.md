@@ -76,7 +76,7 @@ New-addcCloneConfigFile -static ipv4address "192.168.0.5" -Ipv4DnsResolver "192.
 
 ## *IFM*
 
-O metodo IFM é utilizado para implemtanção de AD em ambientes que duas filias estão conectadas atraves de link de internet lento. Com isso utilizamos a a midia de intação a fim de minimizar o impacto da implantação do AD, pois sabemos que a replicação inicial pode ser muito grande.
+​	O metodo IFM é utilizado para implemtanção de AD em ambientes que duas filias estão conectadas atraves de link de internet lento. Com isso utilizamos a a midia de intação a fim de minimizar o impacto da implantação do AD, pois sabemos que a replicação inicial pode ser muito grande.
 
 Comandos utilizados para criação da mídia:
 
@@ -106,8 +106,8 @@ create sysvol full c:\ifm # Com esse comando é criado os arquivos necessários 
     ```
 
     Em seguida através do mmc adcionar o console do schema e realizar a alteração.
-
-Alteração das funções FSMO através da linha de comando:
+  
+  Alteração das funções FSMO através da linha de comando:
 
 ```powershell
 # Consultar o mestre de esquema do domínio
@@ -126,3 +126,40 @@ transfer schema master
 transfer infrastructure master
 ```
 
+​	Transferência dos mestres de operação através do Powershell 
+
+```powershell
+# Consulta ao Domínio onde mostra os mestres de operações do domínio e outras opções.
+Get-ADDomain
+# Para refinar a consulta utilizamos o comando da seguinte maneira.
+Get-ADDOmain | fl Infrastructuremaster,PDCEmulation,RDIMaster
+# Consultar os mestres de operações a nivel de floresta.
+Get-AFForest | fl DomainNamingMaster,SchemaMaster
+# Transferindo funções FSMO 
+Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole DomainNamingMaster,SchemaMaster,Infrastructuremaster,PDCEmulation,RDIMaster
+```
+
+​	Captura de funções FSMO
+​	Esse procedimento é utilizado em ocasiões onde perdemos o mestre de operações da rede seja por motivos de falha no sistema operacional ou administrativa. Esse procedimento só é possível através de linha de comando.
+
+​	Executando captura através do prompt de comando.
+
+```powershell
+ntdsutil
+roles
+connections
+connection to server srv01.shs.local
+quit
+seize PDC # Note que esse comando é a diferença que permite a captura do mestre de operação.
+seize rid master
+seize schema master
+seize naming master
+seize infrastructure master
+```
+
+  	Captura através do powershell.
+
+```powershell
+# Note que a unica diferença é o comando -force ao final do comando.
+Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole DomainNamingMaster,SchemaMaster,Infrastructuremaster,PDCEmulation,RDIMaster -force
+```
