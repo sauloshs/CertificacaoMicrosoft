@@ -164,7 +164,7 @@ seize infrastructure master
 Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole DomainNamingMaster,SchemaMaster,Infrastructuremaster,PDCEmulation,RDIMaster -force
 ```
 
-​	Criação de contas de usuários
+## *Criação de contas de usuários*
 
 - Contas de usuários 
 
@@ -181,3 +181,23 @@ Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole D
 
   Obs. sobre perfil móvel de usuário.
   No perfil móvel os dados do usuário somente serão levados para o servidor após a realização do logoff.
+
+## *Grupos de Usuários*
+
+- Grupos de distribuição 
+  - Usados somente com aplicativos de email.
+  - Não são habilitados para segurança (sem SID).
+  - Não é possível conceder permissões.
+- Grupos de segurança
+  - Entidade de segurança com SID.
+  - É possível conceder permissões.
+  - Também pode ser habilitado para email
+
+Obs. Você pode converter grupos de segurança para grupos de distribuição e vice-versa.
+
+​	Escopo de Grupo.
+
+- Os grupos locais podem conter usuários, computadores, grupos globais, grupos do domínio local e grupos universais do mesmo domínio, de domínio da mesma floresta e de outros domínios confiáveis. Além disso, eles podem receber permissões para recursos apenas do computador local.
+- Os grupos de domínio local tem as mesmas possibilidades de associação, mas pode receber permissão para recursos em qualquer lugar do domínio.
+- Os grupos globais podem conter apenas usuários, computadores, e outros grupos globais do mesmo domínio. Além disso, eles podem receber permissões para recursos no domínio ou qualquer outro domínio confiavel. 
+- Os grupos universais podem conter usuários, computadores, grupos globais e outros grupos universais do mesmo domínio ou de domínio da mesma floresta. Além disso, eles podem receber permissões para qualquer recurso na Floresta.
