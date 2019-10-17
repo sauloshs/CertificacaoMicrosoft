@@ -163,3 +163,21 @@ seize infrastructure master
 # Note que a unica diferença é o comando -force ao final do comando.
 Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole DomainNamingMaster,SchemaMaster,Infrastructuremaster,PDCEmulation,RDIMaster -force
 ```
+
+​	Criação de contas de usuários
+
+- Contas de usuários 
+
+  - Permitir ou negar acesso para efetuar logon em computadores.
+  - Conceder acesso a processos e serviços.
+  - Gerenciar acesso a recursos da rede.
+
+- As contas de usuários podem ser criadas usando.
+
+  - Usuários e computadores do Active Directory.
+  - Centro Administrativo do Active Directory.
+  - Windows Powershell.
+  - Ferramenta de linha de comando do diretório dsadd.
+
+  Obs. sobre perfil móvel de usuário.
+  No perfil móvel os dados do usuário somente serão levados para o servidor após a realização do logoff.
