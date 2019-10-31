@@ -87,27 +87,33 @@ ifm # Com esse comando entramos no modulo NTDS
 create sysvol full c:\ifm # Com esse comando é criado os arquivos necessários para a criação da midia IFM
 ```
 
-## *FSMO*
+## *Funções de Mestre de Operações (FSMO)*
 
 ​	As funções FSMO são:
 
-- Mestre RID responsável por gerar os SIDs dos objetos, porem para evitar problemas na criação de objetos na rede por indisponibilidade do mestre de operação ele distribui um bloco de SID para cada controlador de domínio.
+- A nível de Floresta:
+  - Mestre de esquema: O mestre de esquema mantém o esquema e é responsável por propagar quaisquer alterações feitas nele para outras cópias dessa partição do AD DS em todos os outros controladores de domínio da floresta. Como o esquema raramente muda, a ausência temporária desse mestre de operações pode passar despercebida facilmente. Contudo, ele deve estar online quando você fizer mudanças no esquema, por exemplo, quando instalar um aplicativo, como o Exchange Server, que exige tipos de objetos e atributos adicionais em relação aos tipos de objetos existentes.
+  - Mestre de nomeação de domínio: O mestre de nomeação de domínio manipula a adição ou a renomeação de domínios na floresta do AD DS. Como esses tipos de alterações não são frequentes, se o mestre de nomeação de domínio ficar indisponível temporariamente, você pode não perceber isso imediatamente.
 
-- Mestre de Infraestrutura 
+- A nível de Domínio:
 
-- Mestre de nomeação de domínio
+  - Emulador PDC: Executa várias operações importantes em nível de domínio.
+    - Atua como fonte de sincronização de hora para o domínio.
+    - Propaga alterações de senha.
+    - Fornece uma fonte primária para GPOs para propósitos de edição.
+  - Mestre de infraestrutura: Mantém referência entre domínios e, consequentemente, essa função só é relevante em florestas com vários domínios. Por exemplo, o mestre de infraestrutura mantém a integridade da lista de controle de acesso de segurança de um objeto, quando essa lista contém entidades de segurança (Security principals) de outro domínio.
+    - Você não deve atribuir a função de mestre de infraestrutura a um servidor de catalogo global, a não ser que sua floresta consista de apenas um domínio. A única exceção a isso é se todos os controladores de domínio também são servidores de catálogo global, nesse caso a função mestre de infraestrutura é redundante.
+  - Mestre RID: Fornece blocos de identificação para cada um dos controladores de domínio em seu domínio. cada objeto em um domínio exige um identificador único.
 
-- Emulador PDC ou Controlador de domínio primário, responsável por atualizar a hora de todos os computadores do domínio e necessário na clonagem de AD DS.
+  Para ter acesso ao Mestre de Schema, é necessário registrar uma dll com o seguinte comando no prompt de comando.
 
-  - Mestre de Schema, Para ter acesso ao console do mestre de schema é necessário registrar uma dll com o seguinte comando no prom	pt de comando.
+```powershell
+regsvr32 schmgmt.dll
+```
 
-    ```powershell
-    regsvr32 schmgmt.dll
-    ```
+Em seguida através do mmc adcionar o console do schema e realizar a alteração.
 
-    Em seguida através do mmc adcionar o console do schema e realizar a alteração.
-  
-  Alteração das funções FSMO através da linha de comando:
+Alteração das funções FSMO através da linha de comando:
 
 ```powershell
 # Consultar o mestre de esquema do domínio
