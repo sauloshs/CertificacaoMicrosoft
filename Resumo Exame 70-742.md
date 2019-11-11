@@ -207,3 +207,21 @@ Obs. Você pode converter grupos de segurança para grupos de distribuição e v
 - Os grupos de domínio local tem as mesmas possibilidades de associação, mas pode receber permissão para recursos em qualquer lugar do domínio.
 - Os grupos globais podem conter apenas usuários, computadores, e outros grupos globais do mesmo domínio. Além disso, eles podem receber permissões para recursos no domínio ou qualquer outro domínio confiavel. 
 - Os grupos universais podem conter usuários, computadores, grupos globais e outros grupos universais do mesmo domínio ou de domínio da mesma floresta. Além disso, eles podem receber permissões para qualquer recurso na Floresta.
+
+​	Gerencie cuidadosamente os grupos padrão que fornecem privilégios administrativos, pois eles: 
+
+- Geralmente, têm privilégios mais amplos do que necessário para a maioria dos ambientes delegados.
+- Aplicam proteção com frequência aos seus membros.	
+
+| Grupo                      | Local                                             |
+| -------------------------- | ------------------------------------------------- |
+| Administradores de Empresa | Contêiner de usuários do domínio raiz da floresta |
+| Administradores de Esquema | Contêiner de usuários do domínio raiz da floresta |
+| Administradores            | Contêiner interno de cada domínio                 |
+| Admins. do Domínio         | Contêiner de usuários de cada domínio             |
+| Operadores de Servidor     | Contêiner interno de cada domínio                 |
+| Opers. de Contas           | Contêiner interno de cada domínio                 |
+| Operadores de Backup       | Contêiner interno de cada domínio                 |
+| Operadores de Impressão    | Contêiner interno de cada domínio                 |
+| Editores de Certificados   | Contêiner de usuários de cada domínio             |
+
