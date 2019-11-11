@@ -252,3 +252,20 @@ Obs.: O contêiner computadores criado por padrão que é usado para armazenar c
 #Test-ComputerSecureChannel -Repair
 ```
 
+### *Ingressando máquinas no domino off-line.*
+
+```powershell
+# Primeiro devemos realizar o provisionamento da conta de computador no AD DS
+djoin /provison /domain shs.local /machine srv02 /savefile c:\djoin\srv02.txt 
+
+# No computador ao qual desejamos incluir no domnio executamos o seguinte comando:
+djoin /requestODJ /loadfile c:\djoin\srv02.txt /windowspath %systemroot% /localos
+```
+
+​	Alterando local padrão dos computadores ingressados no domínio.
+
+```powershell
+# No exemplo abaixo as contad de computadores foram redirecionadas para a OU matrizcmp
+redircmp ou=matrizcmp,dc=shs,dc=local
+```
+
