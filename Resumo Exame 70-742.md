@@ -225,3 +225,30 @@ Obs. Você pode converter grupos de segurança para grupos de distribuição e v
 | Operadores de Impressão    | Contêiner interno de cada domínio                 |
 | Editores de Certificados   | Contêiner de usuários de cada domínio             |
 
+Obs.: O contêiner computadores criado por padrão que é usado para armazenar computadores recém adicionados no domínio não podem ser vinculados a GPOs.
+
+​	Contas de computadores e canais de segurança.
+
+- OS computadores tem contas:
+  - SAMAccountName e Senha.
+  - Usado para criar um canal de segurança entre  o computador e um controlador de domínio. (As senhas de computadores são negociadas a cada 30 dias  e de forma automática)
+- Cenários em que um canal de segurança pode ser interrompido:
+  - A reinstalação de um computador, inclusive com o mesmo nome, gera um novo SID e uma nova senha.
+  - Restauração de um computador de um backup antigo ou reversão de um computador para um instantâneo antigo.
+  - O computador e domínio descordam sobre a senha.
+
+​	Redefinição do canal de segurança.
+
+- Não exclua um computador do domínio e o adicione novamente. Isso cria uma nova conta, resultando em um novo SID e perda das associações de grupo.
+- Opções para redefinir o canal de segurança:
+
+```powershell
+# Usuários e computadores do active directory => Redefinir computador.
+
+# Centro administrativo do active directory => Redefinir computador.
+
+# dsmod computer "ComputerDN" -reset
+# nltest /server:<servername> /sc_reset:<Domain\domaincontroller>
+#Test-ComputerSecureChannel -Repair
+```
+
