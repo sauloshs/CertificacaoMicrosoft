@@ -201,7 +201,7 @@ Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole D
 
 Obs. Você pode converter grupos de segurança para grupos de distribuição e vice-versa.
 
-​	Escopo de Grupo.
+​	**Escopo de Grupo.**
 
 - Os grupos locais podem conter usuários, computadores, grupos globais, grupos do domínio local e grupos universais do mesmo domínio, de domínio da mesma floresta e de outros domínios confiáveis. Além disso, eles podem receber permissões para recursos apenas do computador local.
 - Os grupos de domínio local tem as mesmas possibilidades de associação, mas pode receber permissão para recursos em qualquer lugar do domínio.
@@ -271,6 +271,17 @@ redircmp ou=matrizcmp,dc=shs,dc=local
 
 ## *Ambiente distribuído do AD DS*
 
-Reverter elevação de nivel funcional do domínio 
+Reverter elevação de nível funcional do domínio 
 
-Set-ADDomainMode
+Set-ADDomainMode.
+
+## *Indenidades Especiais*
+
+​	Elas são tratas como  grupos dentro do sistema operacional, visto que é possível conceder permissões e direitos a elas, como qualquer outro grupo. Contudo, a lista de membros não pode ser editada, ou seja, não é possível associar uma identidade especial a um usuário (ou outro grupo). Em vez disso, os membros de grupo são associados de forma implícita, com base nas características de um usuário em determinada situação. As identidades especiais são:
+
+- **Everyone** Esta identidade representa todo mundo e inclui tanto usuários com conta como convidados sem conta - supondo que contas de convidados estejam habilitadas.
+- **Authenticated Users** esta identidade é mais especifica e inclui todos, exceto os convidados.
+- **Anonymous Logon** Esta identidade é usada pelos recursos que não exigem nome de usuários nem senha para permitir o acesso. Ela não incluiu convidados.
+- **Interactive** Um usuário que está tentando acessar um recurso no computador local possui a identidade interactive.
+- **Network** Um usuário que está tentando acessar um recurso em um computador remoto possuiu a identidade Network.
+- **Creator Owener** Qualquer individuo que cria um objeto, como um arquivo possui a identidade Creator Owner desse objeto. Um usuário associado a essa identidade tem total controle sobre o objeto. 
