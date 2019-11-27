@@ -269,3 +269,8 @@ djoin /requestODJ /loadfile c:\djoin\srv02.txt /windowspath %systemroot% /localo
 redircmp ou=matrizcmp,dc=shs,dc=local
 ```
 
+## *Ambiente distribuído do AD DS*
+
+Reverter elevação de nivel funcional do domínio 
+
+Set-ADDomainMode
