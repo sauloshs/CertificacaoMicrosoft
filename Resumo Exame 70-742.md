@@ -285,3 +285,59 @@ Set-ADDomainMode.
 - **Interactive** Um usuário que está tentando acessar um recurso no computador local possui a identidade interactive.
 - **Network** Um usuário que está tentando acessar um recurso em um computador remoto possuiu a identidade Network.
 - **Creator Owener** Qualquer individuo que cria um objeto, como um arquivo possui a identidade Creator Owner desse objeto. Um usuário associado a essa identidade tem total controle sobre o objeto. 
+
+## *Replicação do AD DS* 
+
+​	**Replicação Intrassites** 
+
+​	A replicação Intrassites usa:
+
+- **Objeto de conexão** para replicação de entrada em um controlador de domínio.
+
+- **Knowledge Consistency Checker** para automaticamente criar a topologia que é eficiente (máximo três saltos) e robusta (bidirecional).
+
+- **Notificação** nas quais o controlador de domínio informa aos seus parceiros downstream que uma alteração esta disponível.
+
+- **Sondagem**, na qual o controlador de domínio verifica com seus parceiros upstream se há alterações:
+
+  - O agente de replicação de diretório do controlador de domínio downstream replica as alterações.
+  
+- As alterações em todas as partições mantidas por ambos os controladores de domínio são replicadas.
+
+**Como Funciona a replicação Sysvol.**
+
+- O Sysvol contém scripts de logon, modelos de políticas de grupo e GPOs com seu conteúdo.
+
+- A replicação sysvol pode ocorrer usando:
+
+  - O FRS, que é usado principalmente no Windows Server 2003 e em estruturas de domínio mais antigas.
+  - A replicação do DFS, que é usada no Windows Server 2008 e em domínios mais recentes.
+
+- Para migrar a replicação SYSVOL do FRS para a replicação do DFS:
+
+  - O nível funcional do domínio deve ser pelo menos Windows Server 2008.
+  
+- Use a ferramente **Dfsrmig.exe** para executar a migração.
+
+**O que são sites do AD DS?**
+
+- Os sites identificam locais de rede com conexão de rede rápidas e confiáveis.
+- Os sites são associados a objetos de sub-rede.
+- Os sites são usados para gerenciar:
+  - Replica quando controladores de domínio são separados por links lentos e caros.
+  - Localização do serviço.
+    - Autenticação do controlador de domínio.
+    - Serviços ou aplicativos que reconhecem o AD DS (reconhecimento de site).
+
+**Como funciona a replicação entre sites.**
+
+- A replicação em sites:
+  - Presume links de rede rápidos, baratos e altamente confíaveis.
+  - Não compacta o trafego.
+  - Usa um mecanismo de notificação de alteração.
+- A replicação entre sites:
+  - Presume links de rede de custo mais alto, largura de banda limitada e não confíavel.
+  - Tem a capacidade de compactar a replicação.
+  - Ocorre em uma agenda configurada.
+  - Pode ser configurada para replicações imediatas e urgentes. (Uma excessao a essa regra é a alteração de senha do usuário que é iniciada imediatamente no mestre de emução de PDC imediatamente)
+
