@@ -339,5 +339,36 @@ Set-ADDomainMode.
   - Presume links de rede de custo mais alto, largura de banda limitada e não confíavel.
   - Tem a capacidade de compactar a replicação.
   - Ocorre em uma agenda configurada.
-  - Pode ser configurada para replicações imediatas e urgentes. (Uma excessao a essa regra é a alteração de senha do usuário que é iniciada imediatamente no mestre de emução de PDC imediatamente)
+  - Pode ser configurada para replicações imediatas e urgentes. (Uma excessao a essa regra é a alteração de senha do usuário que é iniciada imediatamente no mestre de emução de PDC imediatamente).
+
+**Links de sites**
+
+- Dentro de um link de site, um objeto de conexão pode ser criado entre quaisquer dos controladores de domínio.
+- O link de site padrão, **DEFAULTIPSITELINK**, nem sempre é apropriado à sua topologia de rede.
+  - O DEFAULTIPSITELINK tem o custo padrão igual a 100 e ao criar um novo link de site podemos mudar o intervalo de replicação.
+- Custos de links de sites:
+  - A replicação usa conexões com custos mais baixos.
+- Replicação:
+  - Durante a sondagem, o servidor **Bridgehead** (Servidor responsável pela replicação entre sites) downstream sonda seus parceiros upstream.
+    - O padrão é de 3 horas.
+    - O mínimo é de 15 minutos.
+    - O recomendável é 15 minutos.
+  - Agendamentos de replicação:
+    - 24 horas por dia.
+    - É possível agendar 
+
+***Comandos para administração de sites no prompt de comando***
+
+```powershell
+# Recalcular a topologia de replicação do servidor 
+repadmin /kcc
+# Exibir informações de replicação com o seu DC
+repadmin /showrepl
+# Verifica quais são os servidor Bridgeheads
+repadmin /bridgeheads
+# Exibe um resumo das tarefas de replicação
+repadmin /replsummary 
+# Testa a replicação
+dcdiag /test:replicarions
+```
 
