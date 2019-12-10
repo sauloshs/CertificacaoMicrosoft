@@ -372,3 +372,17 @@ repadmin /replsummary
 dcdiag /test:replicarions
 ```
 
+## *GPO*
+
+​	A política de grupo é simplesmente a maneira mais fácil de abranger e configurar o computador e as configurações do usuário em redes baseadas no AD DS.
+​	Os requisitos para utilizar as políticas de grupos são:
+
+- A rede deve ser baseada em AD DS.
+- Os computadores que você deseja gerenciar devem estar ingressados no domínio, e os usuários que você deseja gerenciar dever usar credencias de domínio para fazer logon nos respectivos computadores.
+- É necessário ter permissão para editar a política de grupo no domínio.
+
+​	Na GPO default a política de senha do domínio por padrão tem o seu nível de complexibilidade habilitado por padrão, e a senha do usuário deve satisfazer 3 dos 4 solicitados, que são letras maiúsculos, minúsculas, números e caracteres especiais. 
+
+**Armazenar senha utilizando criptografia reversível** permite que você utilize a senha de login do usuário sem criptografia. Essa alternativa não é uma opção segura para o ambiente, mas pode ser necessario ativar para uso com aplicações de terceiros que não permite trabalhar com criptografia. 
+
+**Atribuição de direitos de usuários** você pode dar algumas permissões que nativamente vem desabilitadas para usuários padrão. Com isso não precisamos dar permissões de administrador para executar determinada tarefa. Ex: alterar a hora do sistema.
