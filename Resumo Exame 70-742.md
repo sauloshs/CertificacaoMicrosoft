@@ -61,7 +61,7 @@ Requisitos:
 - O Hypervisor precisa oferecer suporte a identificação de geração em VMs.
 - Controlador de domínio baseados em Windows Server 2012 ou posterior 
 - Emulador PDC online.
-- O controlador de domínio colunável deve pertencer ao grupo controladores de domínios clonáveis.
+- O controlador de domínio clonavel deve pertencer ao grupo controladores de domínios clonáveis.
 
 Comandos que devem ser executados no PowerShell para clonar o controlador de domínio:
 
