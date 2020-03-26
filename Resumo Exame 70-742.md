@@ -383,7 +383,7 @@ dcdiag /test:replicarions
 
 ​	Na GPO default a política de senha do domínio por padrão tem o seu nível de complexibilidade habilitado por padrão, e a senha do usuário deve satisfazer 3 dos 4 solicitados, que são letras maiúsculos, minúsculas, números e caracteres especiais. 
 
-**Armazenar senha utilizando criptografia reversível** permite que você utilize a senha de login do usuário sem criptografia. Essa alternativa não é uma opção segura para o ambiente, mas pode ser necessario ativar para uso com aplicações de terceiros que não permite trabalhar com criptografia. 
+**Armazenar senha utilizando criptografia reversível** permite que você utilize a senha de login do usuário sem criptografia. Essa alternativa não é uma opção segura para o ambiente, mas pode ser necessário ativar para uso com aplicações de terceiros que não permite trabalhar com criptografia. 
 
 **Atribuição de direitos de usuários** você pode dar algumas permissões que nativamente vem desabilitadas para usuários padrão. Com isso não precisamos dar permissões de administrador para executar determinada tarefa. Ex: alterar a hora do sistema.
 
@@ -396,3 +396,10 @@ backup-gpo -all -Path c:\backup
 restore-gpo -path c:\backup -Name compras
 ```
 
+### Relatórios RSOP
+
+​	Pode usar ter assistentes:
+
+- Assistente de resultados de politicas de grupo
+- GPResults
+- Get-GPResultantSetOfPolicy
