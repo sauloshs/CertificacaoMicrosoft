@@ -386,3 +386,13 @@ dcdiag /test:replicarions
 **Armazenar senha utilizando criptografia reversível** permite que você utilize a senha de login do usuário sem criptografia. Essa alternativa não é uma opção segura para o ambiente, mas pode ser necessario ativar para uso com aplicações de terceiros que não permite trabalhar com criptografia. 
 
 **Atribuição de direitos de usuários** você pode dar algumas permissões que nativamente vem desabilitadas para usuários padrão. Com isso não precisamos dar permissões de administrador para executar determinada tarefa. Ex: alterar a hora do sistema.
+
+### Backup de GPO
+
+```powershell
+# Backup de GPO
+backup-gpo -all -Path c:\backup
+# Restaurar GPO compras
+restore-gpo -path c:\backup -Name compras
+```
+
