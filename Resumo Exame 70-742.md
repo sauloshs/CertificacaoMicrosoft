@@ -403,3 +403,25 @@ restore-gpo -path c:\backup -Name compras
 - Assistente de resultados de politicas de grupo
 - GPResults
 - Get-GPResultantSetOfPolicy
+
+## *PSO*
+
+​	Objeto de politica de senha serve para criar uma senha mais refinada para um grupo especifico de usuários, e foi introduzida a partir do Windows Server 2008.
+​	O caminho para configurar essa opção no Windows Server 2016 é através da Central Administrativa do Active Directory, em seguida clicando no domínio, System,Password Settings Container e em seguida clicar em novo.
+
+## *Criando contas de serviços gerenciadas*
+
+```powershell
+# No AD DS atraves do powershell
+New-ADServiceAccount -Name SauloService -RestrictToSingleComputer -Enabled $True
+# Depois devemos associar essa conta a um computador
+Add-ASComputerServiceAccount -Identity srv02 -ServiceAccount SauloService 
+# No servidor de destino no nosso caso srv02 devemos instalar a ferramenta de RSAT caso o mesmo não seja um controlador de domínio
+Add-WindowsFeature Rsat-AD-Powershell
+# Apos a intalação instalar a conta no servidor de destino
+Install-ADServiceAccount -identity SauloService
+# Apos esse procedimento podemos associar essa conta shs\SauloService a um serviço em srv02
+```
+
+ 
+
