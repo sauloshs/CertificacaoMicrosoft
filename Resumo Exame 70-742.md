@@ -423,5 +423,13 @@ Install-ADServiceAccount -identity SauloService
 # Apos esse procedimento podemos associar essa conta shs\SauloService a um serviço em srv02
 ```
 
- 
+ ## *AD CS*
+
+​	Para gerenciar a hierarquia do AD CS 
+
+- Console de gerenciamento da AC
+- Windows Powershell
+- Ferramenta de linha de comando CertUtil.exe
+
+No processo de restauração do backup do AD CS também devemos realizar o backup do registro no regedit no seguinte caminho: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration
 
