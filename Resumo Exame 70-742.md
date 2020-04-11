@@ -431,5 +431,13 @@ Install-ADServiceAccount -identity SauloService
 - Windows Powershell
 - Ferramenta de linha de comando CertUtil.exe
 
-No processo de restauração do backup do AD CS também devemos realizar o backup do registro no regedit no seguinte caminho: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration
+No processo de restauração do backup do AD CS também devemos realizar o backup do registro no regedit no seguinte caminho: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration.
+
+## *AD FS*
+
+​	Comando para criar a chave raiz do KDS do AD FS
+
+```powershell
+Add-KdsRootKey -EfefectivTime ((Get-Date).addhours(-10))
+```
 
