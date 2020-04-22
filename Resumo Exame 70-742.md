@@ -441,3 +441,16 @@ No processo de restauração do backup do AD CS também devemos realizar o backu
 Add-KdsRootKey -EfefectivTime ((Get-Date).addhours(-10))
 ```
 
+## *AD Sync*
+
+Comandos do powershell usado com o AD Sync do Microsoft Azure.
+
+```powershell
+# Consultando tarefas agendadas de sincronização
+Get-ADSyncScheduler
+# Alterando o intervalo de sincronização
+Set-ADSyncScheduler -CustomizadSymcCycleInterval 01:00:00
+# Startando a tarefa de sincronização
+Start-ADSyncSyncCycle -Policytype delta
+```
+
