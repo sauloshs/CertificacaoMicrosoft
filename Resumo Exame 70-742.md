@@ -454,3 +454,27 @@ Set-ADSyncScheduler -CustomizadSymcCycleInterval 01:00:00
 Start-ADSyncSyncCycle -Policytype delta
 ```
 
+## *Desfragmentação do AD DS*
+
+Para a realização dessa operação o serviço de AD DS deve ser parado na console services.msc
+
+```powershell
+# com o prompt de comando elevado digita
+ntdsutil
+active instance ntds
+files
+compact to c:\
+# A desfragmentação se inicia...
+# Em seguida é #necessario copiar os seguintes arquivos
+copy "C:\ntds.dit" "C:\Windows\NTDS\ntds.dit"
+# E deletar o seguinte arquivo
+del C:\Windows\NTDS\*.log
+```
+
+Após esses procedimentos o serviço do AD DS pode ser iniciado.
+
+## *Lixeira do AD DS*
+
+Requisito mínimo
+
+- Nível funcional da floresta Windows Server 2008 R2
