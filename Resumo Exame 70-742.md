@@ -478,3 +478,51 @@ Após esses procedimentos o serviço do AD DS pode ser iniciado.
 Requisito mínimo
 
 - Nível funcional da floresta Windows Server 2008 R2
+
+## *Backup do AD DS*
+
+O backup do AD DS pode ser realizado por três ferramentas:
+
+- Backup do Windows Server
+- Backup do Microsoft Azure
+- Data Protection Manager
+
+Os backups dos AD DS pode ser realizado de duas maneiras?:
+
+- Autoritativa - Quando à necessidade de que a partir desse backup seja restaurado alguma unidade organizacional que foi excluída acidentalmente.
+- Não autiritativa - Quando somente é restaurada a função de AD DS de um servidor com problema.
+
+Para iniciar um AD DS no modo DSRM é necessário o seguinte procedimento no prompt de comando:
+
+```powershell
+bcdedit /set safeboot dsrepair
+```
+
+Após a reinicialização do servidor deve fazer login com a conta de Administrador e com a senha que foi definida para o DSRM no momento da instalação da função do AD DS.
+Partindo do pressuposto que foi realizado o backup utilizando a ferramenta Backup do Windows Server devemos executar os seguintes procedimentos no prompt de comando: 
+
+```powershell
+# Listando backups em uma Unidade E: no nosso exemplo
+wbadmin get versions -backuptarget:e: -machine:srv01
+# Restaurando o backup do Systemstate com data 25/04/2020-17:07.
+wbadmin start Systemstaterecovery -version:26/04/2020-17:07 -backuptarget:e: -machine:srv01
+# Confirme todas as proximas telas...
+# Após a reinialização o retore esta concluido.
+```
+
+Para realizar a restauração de modo autoritativo após a restauração do Windows, deve entrar no prompt de comando e executar os seguintes procedimentos:
+
+```powershell
+# Nesse exemplo vamos restaurar uma unidade organizacional chamada tecnologia de modo autoritativo para que sejá replicada para todos os controladores de doínio
+ntdsutil
+activate instace ntds 
+authoritative restore  
+restore subtree "ou=tecnologia,dc=shs,dc=local"
+```
+
+Para sair do modo DSRM devemos executar o seguinte procedimento no prompt de comando:
+
+```powershell
+bcdedit /deletevalue safeboot
+```
+
