@@ -372,6 +372,20 @@ repadmin /replsummary
 dcdiag /test:replicarions
 ```
 
+## *RODC*
+
+Considere as seguintes limitações ao implantar o RODC:
+
+- Os RODCs não podem ser proprietários da função de mestre de operações.
+- Os RODCs não podem ser servidores bridgehead.
+- Você deve ter apenas um RODC por site, por domínio.
+- OS RODCs não podem autenticar através de relação de confiança quando a conexão de WAN não disponível.
+- Nenhuma alteração de replicação se origina em RODC.
+- Os RODCs não da suporte apropriado a aplicação que precisam atualizar o AD DS interativamente.
+
+No momento da instalação de um servidor RODC devemos criar uma conta de administrador delegado, pois as contas de administrador do domínio não tem suas senhas replicadas para o mesmo.
+Nas propriedades do servidor RODC (Usuário e computadores do Active Directory) temos a opção "Diretiva de replicação de Senha" onde veremos as contas que são permitidas o armazenamento em cache no servidor RODC.
+
 ## *GPO*
 
 ​	A política de grupo é simplesmente a maneira mais fácil de abranger e configurar o computador e as configurações do usuário em redes baseadas no AD DS.
