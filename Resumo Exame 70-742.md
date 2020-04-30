@@ -372,6 +372,14 @@ repadmin /replsummary
 dcdiag /test:replicarions
 ```
 
+## *Relação de Confiança*
+
+Sempre que for criar uma relação de confiança entre duas empresas que pertençam a florestas distintas devemos criar uma **zona stub** no DNS para que ele replique somente os registros de nomes da outra empresa.
+Também podemos criar encaminhadores condicionais mas, é recomentado a zona stub.
+
+- **Transitividade da relação de confiança** - A transitividade determina se uma relação de confiança pode ser estendida para fora dos dois domínios entre os quais ela foi formada. É possível usar uma relação de confiança transitiva para estender relações de confiança com outros domínios. Você pode usar uma relação de confiança intransitiva para negar relações de confiança com outros domínios.
+- **Relação de confiança intransitiva** - Uma relação de confiança intransitiva é restrita a dois domínios da relação de confiança. Ela não segue na direção de nenhum outro domínio da floresta. Além disso, ela pode ser unidirecional ou bidirecional. As relações de confiança intransitivas são unidirecionais por padrão, embora também seja possível criar uma relação bidirecional durante a criação de relações de confiança unidirecionais.
+
 ## *RODC*
 
 Considere as seguintes limitações ao implantar o RODC:
