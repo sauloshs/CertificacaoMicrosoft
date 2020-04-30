@@ -43,9 +43,9 @@ Rebaixando um controlador de domínio através do PowerShell:
 
 ```powershell
 # Rebaixando
-Uninstall -addsdomaincontroller
+Uninstall-addsdomaincontroller
 # Removendo a Função AD DS
-Uninstall -WindowsFeature AD-Domain-Services
+Uninstall-WindowsFeature AD-Domain-Services
 ```
 
 ## *Clonagem do Active Directory*
