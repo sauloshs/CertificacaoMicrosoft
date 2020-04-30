@@ -36,7 +36,7 @@ Instalando a função de AD DS através do PowerShell:
 # Instalando função AD DS
 Install-WindowsFeature AD-Domain-Services
 # Promovendo a um controlador de domínio e adicionar a função de DNS
-InstallADDSDomainController InstallDNS -DomainName shs.com
+Install-ADDSDomainController InstallDNS -DomainName shs.com
 ```
 
 Rebaixando um controlador de domínio através do PowerShell:
