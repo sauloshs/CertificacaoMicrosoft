@@ -453,6 +453,59 @@ Install-ADServiceAccount -identity SauloService
 - Windows Powershell
 - Ferramenta de linha de comando CertUtil.exe
 
+**Solucionar problemas de ACc**
+
+- Ferramentas para o gerenciamento de ACs:
+  - Snap-in de certificados.
+  - Console PKIView.msc.
+  - Console de autoridade de certificação.
+  - Certutil.exe.
+  - Sanp-in de modelos de certificados.
+- Problemas comuns do AD CS:
+  - Problemas de registro automático do cliente.
+  - Opção de AC corporativa indisponível.
+  - Erro ao acessar as páginas da Web da AC.
+  - Registrição de registro de agente.
+
+**Renovação do certificado de uma AC**
+
+- O certificado de AC precisa ser renovado quando seu período de validade estiver próximo da data de expiração.
+- A AC nunca emite certificado que tenha período de validade maior que seu próprio certificado.
+- Considerações para a renovação de um certificado de AC raiz:
+  - Comprimento da chave.
+  - período de validade.
+- Considerações paa a renovação de um certificado de uma AC emissora:
+  - Novo par de chaves.
+  - CRLs pequenas.
+- Procedimento de renovação de um certificado de AC.
+
+**Migração de uma AC raiz para outro computador**
+
+- Para mover uma AC de um computador para outro, você deve realizar o backup e restauração:
+  - Para fazer o backup de um computador, siga este procedimento.
+    - Registe os nomes dos modelos de certificados.
+    - Faça um backup de uma AC no console de administração de AC.
+    - Exporte a subchave de registro.
+    - Desinstale a função da AC.
+    - Confirme os locais da pasta %SystemRoot%
+    - Remova a AC antiga do domínio.
+  - Para restaurar, siga este procedimento:
+    - Instale o AD CS.
+    - Use a chave privada existente.
+    - Restaure o arquivo de registro.
+    - Restaure o banco de dados e as configurações da AC.
+    - Restaure os modelos de certificado.
+
+**ACs autônomas vs ACs corporativas** 
+
+| ACs autônomas                                                | Acs cosporativas                                             |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Deve ser usada caso uma CA (raiz/intermediaria/de politica) estiver off-line porque uma AC autônoma não está adicionada a um domínio do AD DS. | Exige o uso de ADDS e armazena informações em AD DS.         |
+|                                                              | Pode Usar a política de grupo para propagar certificados para o repositório de certificado AC raiz confiável. |
+| Os usuários devem fornecer informações de identificação e especificar o tipo de certificado. | Publica certificados de usuário e CRLs em AD DS.             |
+| Não suporta modelos de certificado.                          | Emite certificados com base em modelo de certificado.        |
+| Todas as solicitações de certificados são mantidas pendentes até a aprovação do administrador. | Dá suporte ao registro automático para emitir certificados.  |
+
 No processo de restauração do backup do AD CS também devemos realizar o backup do registro no regedit no seguinte caminho: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration.
 
 ## *AD FS*
