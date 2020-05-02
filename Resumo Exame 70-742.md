@@ -558,7 +558,7 @@ No processo de restauração do backup do AD CS também devemos realizar o backu
   - Restauração da chave
   - Recuperação da chave
 
-Após emitir o certificado de agente de recuperação e adicionar ao servidor como modelo de certificado de usuário devemos ir na propriedades da CA e habilitar a opção de recuperação de chave e selecionar o certificado vinculado anteriormente.
+Após emitir o certificado de agente de recuperação e adicionar ao servidor como modelo de certificado de usuário devemos ir na propriedades da CA e habilitar a opção de recuperação de chave em **Agente de Recuperação** e selecionar o certificado vinculado anteriormente.
 Nas propriedades de um modelos de certificado vamos em **tratamento de solicitação** para  **Arquivar a chave privada de criptografia de requerente**. Também nessa opção podemos **Permitir que a chave seja exportada**.
 **Em Nome do requerente** - Ao emitir um certificado para usuário se não estivermos utilizando o campo e-mail nas propriedades da conta de usuário devemos desmarcar a opção que solicita o e-mail.
 
