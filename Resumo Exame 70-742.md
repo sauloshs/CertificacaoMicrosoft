@@ -508,6 +508,71 @@ Install-ADServiceAccount -identity SauloService
 
 No processo de restauração do backup do AD CS também devemos realizar o backup do registro no regedit no seguinte caminho: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration.
 
+**Configuração das permissões do modelo de certificado**
+
+| Permissão           | Descrição                                                    |
+| ------------------- | ------------------------------------------------------------ |
+| Controle total      | Permite que um usuário, um grupo ou um computador designado modifique todos os atributos (inclusive propriedades e permissões). |
+| Leitura             | Permite que um usuário, um grupo ou um computador designado leia o certificado no AD DS ao se registrar. |
+| Gravação            | Permite que um usuário, um grupo o um computador designado modifique todos os atributos, excetos permissões. |
+| Registro            | Permite que um usuário, um grupo ou um computador designado se registr no modelo de certificado. |
+| Registro automático | Permite que um usuário, um grupo ou um computador designado receba um certificado pelo processo de registro automático. |
+
+**Métodos de registro de certificado**
+
+| Método                 | Uso                                                          |
+| ---------------------- | ------------------------------------------------------------ |
+| Registro automático    | Para automatizar a solicitação, a recuperação e o armazenamento de certificados para computadores baseados em domínio |
+| Registro manual        | Para solicitar certificados usando o console Certificados ou o Certq.exe quando o solicitante não pode comunicar diretamente com a AC |
+| Registro via Web na AC | Para pedir certificados de um site que está localizado em uma AC.<br /> Para Emitir certificados quando o registro automático não estiver mais disponível. |
+| Registrar em nome de   | Para fornecer a equipe de TI os direitos de solicitação de certificados em nome de outro usuário (Agente de Registro). |
+
+**Visão geral do registro automático de certificado**
+
+- Um modelo de certificado é configurado para conceder as permissões (Permissão: Registro e Registro automático) aos usuários que recebem os certificados.
+- A AC é configurada para emitir o modelo
+- Um objeto de Politica de Grupo do AD DS deve ser criado para habilitar o registro automático.
+- O GPO deve esta vinculado ao site, o domínio ou a unidade organizacional apropriada.
+- O usuário ou computador recebe os certificados durante o próximo intervalo de atualização da Politica de Grupo.
+
+**O que é um agente de registro?**
+
+- Um agente de registro é uma conta de usuário utilizada para solicitar certificados em nome de outra conta de usuário.
+- Um agente de registro deve ter um certificado baseado no modelo do agente agente de registro.
+- Os agentes de registro geralmente são membros da empresa ou dos departamentos de segurança de TI.
+- Você pode limitar o escopo de um agente de registro:
+  - Usuários ou grupos de segurança específicos.
+  -  Modelos de certificados específicos.
+
+**Visão geral de arquivamento de chave**
+
+É de fundamental importancia os certificados digitais e suas chaves correspondentes serem mantidas em segurança. Se você perder as chaves que foram usadas para criptografar arquivos de dados, talvez não possa mais acessar esses arquivos.  
+
+- As chaves podem ser comprometidas nas seguintes situações:
+  - Você reinstalou o sistema operacional.
+  - Um disco rígido foi corrompido.
+  - O computador de um usuário foi roubado ou perdido.
+  - o perfil de trabalho de um usuário foi corrompido ou excluído.
+- Você deve configurar o arquivamento da chave na AC e no modelo de certificado.
+- A recuperação da chave é um processo de duas fases :
+  - Restauração da chave
+  - Recuperação da chave
+
+Após emitir o certificado de agente de recuperação e adicionar ao servidor como modelo de certificado de usuário devemos ir na propriedades da CA e habilitar a opção de recuperação de chave e selecionar o certificado vinculado anteriormente.
+Nas propriedades de um modelos de certificado vamos em **tratamento de solicitação** para  **Arquivar a chave privada de criptografia de requerente**. Também nessa opção podemos **Permitir que a chave seja exportada**.
+**Em Nome do requerente** - Ao emitir um certificado para usuário se não estivermos utilizando o campo e-mail nas propriedades da conta de usuário devemos desmarcar a opção que solicita o e-mail.
+
+Para recuperar o certificado perdido devemos utilizar a ferramenta certutil.exe. 
+
+```powershell
+# Comonado para recuperaçao de certificado
+certutil -getkey <nummero_de_serie_do_certificado_sem_espaco> ArquivoRecuperao
+# Convertendo o arquivo recuperado na extenção valida
+Certutil -recoverkey ArquivoRecuperado Certificado.pfx
+```
+
+
+
 ## *AD FS*
 
 ​	Comando para criar a chave raiz do KDS do AD FS
