@@ -409,6 +409,15 @@ Nas propriedades do servidor RODC (Usuário e computadores do Active Directory) 
 
 **Atribuição de direitos de usuários** você pode dar algumas permissões que nativamente vem desabilitadas para usuários padrão. Com isso não precisamos dar permissões de administrador para executar determinada tarefa. Ex: alterar a hora do sistema.
 
+**Nível de precedência das GPOs**
+
+Os GPOs são processados nos computadores clientes nas seguintes ordens:
+
+- GPOs locais.
+- GPOs no nível de site.
+- GPOs no nível de domínio.
+- GPOs OU, inclusive todas as OU anilhadas.
+
 ### Backup de GPO
 
 ```powershell
