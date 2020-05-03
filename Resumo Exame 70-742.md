@@ -418,6 +418,12 @@ Os GPOs são processados nos computadores clientes nas seguintes ordens:
 - GPOs no nível de domínio.
 - GPOs OU, inclusive todas as OU anilhadas.
 
+**GPO de inicio**.
+
+- Armazena configurações de modelo administrativas nas quais novos GPOs se basearão.
+- Pode ser exportado para arquivos .cab.
+- Pode ser importado para outras áreas de uma organização.
+
 ### Backup de GPO
 
 ```powershell
