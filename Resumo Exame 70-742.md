@@ -424,6 +424,17 @@ Os GPOs são processados nos computadores clientes nas seguintes ordens:
 - Pode ser exportado para arquivos .cab.
 - Pode ser importado para outras áreas de uma organização.
 
+**Configurações para configuração de redirecionamento de pasta.**
+
+- Opções de configuração de redirecionamento de pasta:
+  - Usar o redirecionamento de pasta básico quando todos os usuários salvarem os arquivos no mesmo local.
+  - Usar o redirecionamento de pasta avançado quando o servidor que hospeda o local da pasta estiver baseado em associação de grupo.
+  - usar seguir pasta documentos para forçar determinadas pastas a se tornarem subpastas de documentos. 
+- Opções de local da pasta de destino.
+  - Criar uma pasta para cada usuário no caminho raiz.
+  - Redirecionar para localização de perfil de usuário local.
+  - Redirecionar ao diretório base do usuário (Somente pasta Documentos). 
+
 ### Backup de GPO
 
 ```powershell
@@ -440,6 +451,47 @@ restore-gpo -path c:\backup -Name compras
 - Assistente de resultados de politicas de grupo
 - GPResults
 - Get-GPResultantSetOfPolicy
+
+### **O que são modelos administrativos**
+
+Os modelos administrativos fornecem a capacidade para controlar o ambiente do sistema operacional e a experiência do usuário:
+
+- Seção do modelo administrativo para computadores:
+  - Painel de controle.
+  - Rede.
+  - Impressoras.
+  - Sistema.
+  - Componentes baseados no Windows.
+- Seção do modelo administrativo dos usuários:
+  - Painel de controle.
+  - Área de trabalho.
+  - Rede.
+  - Menu iniciar e barra de tarefas.
+  - Sistema.
+  - Componentes baseados no Windows.
+- Cada uma dessas seções principais contém muitas subpastas para mais configurações de organização.
+
+### **O que são os arquivos .adm e admx?**
+
+- Arquivos .adm.
+  - São copiados em todos os GPOs no SYSVOL.
+  - São difíceis de serem personalizados.
+  - Não apresentam neutralidade de idioma.
+  - Pode causar SYSVOL sovrecarga se houver vários GPOs.
+- Arquivos .admx.
+  - Apresentam neutralidade de idioma.
+  - Os arquivos .adml fornecem o idioma localizado.
+  - Não são armazenados no GPO.
+  - São extensíveis através de XML.
+
+### **Visão geral do repositório central**
+
+O repositório central.
+
+- É um repositório central para arquivos .admx e adml.
+- é armazenado no SYSVOL.
+- Deve ser criado manualmente.
+- É detectado automaticamente pelos sistemas operacionais Windows Vista, Windows Server 2008 e pelos sistemas operacionais mais recentes. 
 
 ## *PSO*
 
