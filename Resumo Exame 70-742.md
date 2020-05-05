@@ -433,7 +433,7 @@ Os GPOs são processados nos computadores clientes nas seguintes ordens:
 - Opções de local da pasta de destino.
   - Criar uma pasta para cada usuário no caminho raiz.
   - Redirecionar para localização de perfil de usuário local.
-  - Redirecionar ao diretório base do usuário (Somente pasta Documentos). 
+  - Redirecionar ao diretório base do usuário (Somente pasta Documentos).  
 
 ### Backup de GPO
 
@@ -492,6 +492,32 @@ O repositório central.
 - é armazenado no SYSVOL.
 - Deve ser criado manualmente.
 - É detectado automaticamente pelos sistemas operacionais Windows Vista, Windows Server 2008 e pelos sistemas operacionais mais recentes. 
+
+**Instalação de aplicativos através de GPO.**
+
+- Métodos:
+  - Publicado - O usuário vai ate o painel de controle para instalar a aplicação disponibilizada pela rede (mesmo que não seja administrador).
+  - Atribuído - O usuário recebe o software automaticamente através da politica de grupo.
+  - Avançado - É o método onde você atribui configurações especificas.
+
+### **O que são preferencias de politicas de grupo**
+
+As extensões de preferência de politica de grupo expandem o intervalo de definições configuráveis dentro de um GPO.
+
+- permite que você gerencie configurações que estavam anteriormente não gerenciável usando Política de Grupo.
+- São suportadas nativamente no Windows Server 2008 e mais recente e no Vista SP2 e mais recente.
+- Podem ser criadas, excluídas, substituídas ou atualizadas.
+- As categorias incluem unidades mapeadas, atalhos, alterações de registro, opções de energia, agendas, tarefas e definições do Internet Explorer.
+
+**Comparação de preferência de Política de Grupo e configurações da Política de Grupo.**
+
+| Configurações de Política de Grupo                           | Preferências de Política de Grupo                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Impõe configurações de política por meio da gravação de configurações em áreas do registro que os usuários padrão não podem modificar. | São gravadas em locais normais no registro que o recurso do aplicativo ou do sistema operacional usa para armazenar a configuração. |
+| Geralmente, desabilita a interface de usuário para configurações que a Política de Grupo está gerenciando. | Não faz o recurso do aplicativo ou do sistema operacional desabilitar a interface de usuário para as configurações que eles configuram. |
+| Atualiza configurações de política em intervalos regulares.  | Atualiza as preferências usando o mesmo intervalo como configuração da Política do Grupo, mas pode ser configurada para aplicar somente uma vez. |
+
+
 
 ## *PSO*
 
