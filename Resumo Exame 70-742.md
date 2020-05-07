@@ -140,7 +140,7 @@ Get-ADDomain
 # Para refinar a consulta utilizamos o comando da seguinte maneira.
 Get-ADDOmain | fl Infrastructuremaster,PDCEmulation,RDIMaster
 # Consultar os mestres de operações a nivel de floresta.
-Get-AFForest | fl DomainNamingMaster,SchemaMaster
+Get-ADForest | fl DomainNamingMaster,SchemaMaster
 # Transferindo funções FSMO 
 Move-ADDirectoryServerOperationMasterRole -identity srv02 -OperationMasterRole DomainNamingMaster,SchemaMaster,Infrastructuremaster,PDCEmulation,RDIMaster
 ```
