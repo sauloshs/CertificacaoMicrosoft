@@ -674,6 +674,109 @@ Certutil -recoverkey ArquivoRecuperado Certificado.pfx
 Add-KdsRootKey -EfefectivTime ((Get-Date).addhours(-10))
 ```
 
+## **AD RMS**
+
+O que é o AD RMS?
+
+É uma tecnologia e proteção de informação que:
+
+- Reduz o vazamento de dados por design.
+- É integrado a determinados produtos Microsoft e sistemas operacionais Windows Server.
+- Ajuda a proteger dados em trânsito, em repouso e basicamente em qualquer local.
+
+Visão geral dos componentes do AD RMS.
+
+- O cluster do AD RMS:
+  - -E criado quando você implanta o primeiro servidor AD RMS.
+- O servidor AD RMS:
+  - Licencia conteúdo protegido pelo AD RMS.
+  - Certifica a identidade de usuário e dispositivos confiáveis.
+- o cliente AD RMS:
+  - É integrado ao Windows Vista, ao Windows 7 e versão posteriores.
+  - Interage com aplicativos habilitados para AD RMS:
+- Os aplicativos habilitados para AD RMS:
+  - Permite a publicação e consumo de conteúdo protegido pelo AD RMS.
+  - Inclui o Office, o Exchange Server e o SharePoint Server.
+  - Podem ser criados  através do AD RMS SDK.
+
+Certificados e licenças do AD RMS.
+
+Os certificados e as licenças do AD RMS incluem:
+
+- Certificados de licenciamento para servidor.
+- Certificados de máquina do AD RMS.
+- RACs.
+- Certificados de Licenciamento para clientes.
+- PLs.
+- Licenças de usuário final.
+
+Cenários de implantação do AD RMS.
+
+Cenários de implantação do AD RMS:
+
+- Implantado em uma única floresta.
+- Implantado em várias florestas.
+- Usado em uma extranet.
+- Integrado ao AD FS.
+- Implantado no Azure como um serviço do Azure RMS.
+
+Obs: durante o assistente de instalação é necessário registrar o SCP do AD RMS e só é possível com uma conta pertencente ao grupo de Administradores da Empresa.
+Um dos pré-requisitos para a implementação do AD RMS é a criação de uma conta que servira como conta e serviço do AD RMS. Essa conta deve pertencer ao grupo Usuários do Domínio. 
+
+**Requisitos do cliene AD RMS.**
+
+- O cliente está incluído no Windows Vista ou mais recente.
+- O cliente está incluído no Windows Server 2008 e mais recente.
+- O cliente está disponível para download para sistemas operacionais Windows XP e Mac OS X.
+- Os aplicativos habilitados para AD RMS incluem Office 2007 e versões mais recentes.
+- O Exchange Server 2007 e versões mas recentes oferecem suporte ao AD RMS.
+- O cliente AD RMS precisa de uma CAL do RMS.
+
+**Implementação de uma estratégia de backup e recuperação do AD RMS**
+
+- Fazer backup da chave privada e dos certificados.
+- Garantir que o backup do bando de dados do AD RMS seja feito regulamente. 
+- Exportar modelos para fazer backup.
+- Executar o servidor AD RMS como VM e fazer backup completo do servidor.
+
+**Monitoramento do AD RMS.**
+
+-  O AD RMS fornece recursos internos de monitoramento e geração de relatórios. 
+- O Microsoft Report Viewer é necessário para a geração de relatórios.
+- Os relatórios disponíveis são:
+  - Estatísticas.
+  - Integridade.
+  - Soluções de Problemas.
+- O Operations Manager pode monitorar o AD RMS com o pacote de gerenciamento existente.
+
+**O que são modelos de políticas de direitos?**
+
+Modelos de políticas de direitos:
+
+- Permite que os autores apliquem formas padrão de proteção em uma organização.
+- Existem em diferentes aplicativos, que permitem diferentes formas de direitos.
+- Permite configurar direitos relacionados à exibição, à edição impressão de documentos.
+- Permite configurar direitos de validade do conteúdo Permite configurar a revogação de conteúdo.
+
+**O que são políticas de exclusão?**
+
+As políticas de exclusão permitem:
+
+- Impedir que usuários específicos acessem o conteúdo protegido pelo AD RMS bloqueando seus RACs.
+- Impedir que aplicativos específicos criem ou consuma conteúdo protegido pelo AD RMS.
+- Bloquear versões específicas de clientes AD RMS.
+
+**Grupo Super Usuários do AD RMS**
+
+- Os membros do grupo Superusuarios recebem plenos direitos de proprietário em todas as licenças de uso emitidas pelo cluster do AD RMS no qual o grupo Superusuario está configurado.
+- O grupo Superusuarios:
+  - Não é configurado por padrão.
+  - Pode ser usado como um mecanismo de recuperação de dados para conteúdo pretegido pelo AD RMS:
+    - Pode recuperar o conteúdo que expirou.
+    - Pode recuperar o conteúdo se o modelo for excluído.
+    - Pode recuperar o conteúdo sem exigir credenciais de autor.
+  - Deve ser um grupo do Active Directory com um endereço de e-mail atribuído.
+
 ## *AD Sync*
 
 Comandos do powershell usado com o AD Sync do Microsoft Azure.
