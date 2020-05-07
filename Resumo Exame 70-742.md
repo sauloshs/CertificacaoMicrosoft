@@ -269,13 +269,7 @@ djoin /requestODJ /loadfile c:\djoin\srv02.txt /windowspath %systemroot% /localo
 redircmp ou=matrizcmp,dc=shs,dc=local
 ```
 
-## *Ambiente distribuído do AD DS*
-
-Reverter elevação de nível funcional do domínio 
-
-Set-ADDomainMode.
-
-## *Indenidades Especiais*
+### *Indenidades Especiais*
 
 ​	Elas são tratas como  grupos dentro do sistema operacional, visto que é possível conceder permissões e direitos a elas, como qualquer outro grupo. Contudo, a lista de membros não pode ser editada, ou seja, não é possível associar uma identidade especial a um usuário (ou outro grupo). Em vez disso, os membros de grupo são associados de forma implícita, com base nas características de um usuário em determinada situação. As identidades especiais são:
 
@@ -286,7 +280,13 @@ Set-ADDomainMode.
 - **Network** Um usuário que está tentando acessar um recurso em um computador remoto possuiu a identidade Network.
 - **Creator Owener** Qualquer individuo que cria um objeto, como um arquivo possui a identidade Creator Owner desse objeto. Um usuário associado a essa identidade tem total controle sobre o objeto. 
 
-## *Replicação do AD DS* 
+## *Ambiente distribuído do AD DS*
+
+Reverter elevação de nível funcional do domínio 
+
+Set-ADDomainMode.
+
+### *Replicação do AD DS* 
 
 ​	**Replicação Intrassites** 
 
@@ -372,7 +372,7 @@ repadmin /replsummary
 dcdiag /test:replicarions
 ```
 
-## *Relação de Confiança*
+### *Relação de Confiança*
 
 Sempre que for criar uma relação de confiança entre duas empresas que pertençam a florestas distintas devemos criar uma **zona stub** no DNS para que ele replique somente os registros de nomes da outra empresa.
 Também podemos criar encaminhadores condicionais mas, é recomentado a zona stub.
